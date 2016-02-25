@@ -1,0 +1,27 @@
+{
+    "name" : "default-value/akeneo-inline-edit-bundle",
+    "type" : "symfony-bundle",
+    "description" : "Add ability to enable inline edit for Akeneo PIM product grid",
+    "keywords" : [
+        "Akeneo",
+        "PIM",
+        "bundle",
+        "Symfony2",
+        "inline-edit"
+    ],
+    "homepage": "https://github.com/DefaultValue",
+    "license": "MIT",
+    "authors" : [
+        {
+            "name": "DefaultValue",
+            "homepage": "http://default-value.com"
+        }
+    ],
+    "require" : {
+        "php": ">=5.3.2",
+        "akeneo/pim-community-dev": ">=1.4.*"
+    },
+    "autoload" : {
+        "psr-4" : { "DefaultValue\\Bundle\\AkeneoInlineEditBundle\\" : "" }
+    }
+}
