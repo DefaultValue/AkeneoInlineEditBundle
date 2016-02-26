@@ -1,0 +1,33 @@
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="default_value.akeneo_inline_edit.product.attribute_repository.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductAttributesRepository</parameter>
+        <parameter key="default_value.akeneo_inline_edit.product.attribute_helper.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductAttributeHelper</parameter>
+        <parameter key="default_value.akeneo_inline_edit.updater.product_updater.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Updater\ProductUpdater</parameter>
+    </parameters>
+
+    <services>
+
+        <!-- Product attribute repository -->
+        <service id="default_value.akeneo_inline_edit.product.attribute_repository" class="%default_value.akeneo_inline_edit.product.attribute_repository.class%"
+                 parent="pim_catalog.repository.attribute">
+        </service>
+
+        <!-- Attribute helper (repository wrapper) -->
+        <service id="default_value.akeneo_inline_edit.product.attribute_helper" class="%default_value.akeneo_inline_edit.product.attribute_helper.class%">
+            <argument type="service" id="default_value.akeneo_inline_edit.product.attribute_repository"/>
+            <argument type="service" id="doctrine.orm.entity_manager"/>
+        </service>
+
+        <!-- Product updater -->
+        <service id="default_value.akeneo_inline_edit.updater.product_updater" class="%default_value.akeneo_inline_edit.updater.product_updater.class%">
+            <argument type="service" id="default_value.akeneo_inline_edit.product.attribute_helper"/>
+            <argument type="service" id="pim_catalog.repository.product"/>
+            <argument type="service" id="pim_catalog.updater.product_property_setter"/>
+            <argument type="service" id="pim_catalog.saver.product"/>
+        </service>
+
+    </services>
+</container>
