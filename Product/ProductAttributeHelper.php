@@ -2,9 +2,9 @@
 
 namespace DefaultValue\Bundle\AkeneoInlineEditBundle\Product;
 
-use DefaultValue\Bundle\AkeneoInlineEditBundle\ProductAttributesRepository;
 use Pim\Bundle\CatalogBundle\Repository\AttributeRepositoryInterface;
 use Doctrine\ORM\EntityManager;
+use DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductAttributesRepository;
 
 /**
  * Helper for working with attribute repository
