@@ -52,6 +52,13 @@ function(Backgrid, CellFormatter) {
                     }, 3000);
                 }
             );
+
+            this.$el.removeClass("error"); // default behavior
+            this.currentEditor.remove();
+            this.stopListening(this.currentEditor);
+            delete this.currentEditor;
+            this.$el.removeClass("editor");
+            this.render();
         }
     });
 });
