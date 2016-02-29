@@ -7,9 +7,13 @@ use Akeneo\Component\StorageUtils\Updater\PropertySetterInterface;
 use Pim\Bundle\CatalogBundle\Doctrine\Common\Saver\ProductSaver;
 use DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductAttributeHelper;
 
-
+/**
+ * Service which updates product attribute value
+ */
 class ProductUpdater
 {
+    const DEFAULT_PRODUCT_CURRENCY = 'USD';
+
     /**
      * @var ProductAttributeHelper
      */
@@ -49,6 +53,16 @@ class ProductUpdater
         $this->productSaver          = $productSaver;
     }
 
+    /**
+     * Update product attribute value
+     *
+     * @param $id
+     * @param $attribute
+     * @param $attributeValue
+     * @param $dataLocale
+     * @param $scopeCode
+     * @return bool
+     */
     public function update($id, $attribute, $attributeValue, $dataLocale, $scopeCode)
     {
         $attributeHelper = $this->attributeHelper;
@@ -64,7 +78,7 @@ class ProductUpdater
             $data = str_replace(" $", "", $attributeValue);
             $attributeValue = [[
                 'data'      => $data,
-                'currency'  => DVProductInterface::DEFAULT_PRODUCT_CURRENCY
+                'currency'  => static::DEFAULT_PRODUCT_CURRENCY
             ]];
         }
 
