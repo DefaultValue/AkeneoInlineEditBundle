@@ -1,0 +1,3 @@
+config:
+    paths:
+        oro/datagrid/string-cell:               defaultvalueakeneoinlineedit/js/datagrid/cell/string-cell

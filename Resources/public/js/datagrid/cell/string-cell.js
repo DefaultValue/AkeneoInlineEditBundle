@@ -24,6 +24,13 @@ function(Backgrid, CellFormatter) {
                 e.stopPropagation();
             }
             return Backgrid.StringCell.prototype.enterEditMode.apply(this, arguments);
+        },
+
+        /**
+         * @inheritDoc
+         */
+        exitEditMode: function () {
+            // @TODO implement method
         }
     });
 });
