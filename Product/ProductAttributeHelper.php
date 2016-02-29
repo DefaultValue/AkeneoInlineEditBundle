@@ -31,36 +31,6 @@ class ProductAttributeHelper
     }
 
     /**
-     * @return array
-     */
-    public function getPreserveAttributes()
-    {
-       $qb = $this->em->createQueryBuilder()
-            ->select('attr')
-            ->from('PimCatalogBundle:Attribute', 'attr')
-            ->where('attr.code LIKE :preserve')
-            ->setParameter(':preserve', '%preserve%')
-            ->orderBy('attr.id', 'desc');
-
-        return $this->prepareAttributesList($qb->getQuery()->getResult());
-    }
-
-    /**
-     * @return array
-     */
-    public function getImportAttributes()
-    {
-        $qb = $this->em->createQueryBuilder()
-            ->select('attr')
-            ->from('PimCatalogBundle:Attribute', 'attr')
-            ->where('attr.code LIKE :import')
-            ->setParameter(':import', '%import%')
-            ->orderBy('attr.id', 'desc');
-
-        return $this->prepareAttributesList($qb->getQuery()->getResult());
-    }
-
-    /**
      * Get from repository codes of scopable attributes
      * @return array
      */
@@ -92,18 +62,6 @@ class ProductAttributeHelper
         $priceEntities = $this->attributeRepository->findByAttributeType($attributeType);
 
         return $this->prepareAttributesList($priceEntities);
-    }
-
-    /**
-     * Get from repository codes of attributes
-     * @param $group_id int
-     * @return array
-     */
-    public function getAttributesByGroupId($group_id)
-    {
-        $entities = $this->attributeRepository->findWithGroups([], ['conditions' => ['group' => $group_id]]);
-
-        return $this->prepareAttributesList($entities);
     }
 
     /**
