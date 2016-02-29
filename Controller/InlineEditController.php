@@ -6,6 +6,7 @@ use DefaultValue\Bundle\AkeneoInlineEditBundle\Updater\ProductUpdater;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 class InlineEditController
 {
@@ -21,6 +22,8 @@ class InlineEditController
 
     /**
      * Apply attribute value for given locale and scope(channel) after grid inline edit
+     *
+     * @AclAncestor("default_value_inline_edit_update_value")
      *
      * @param Request $request
      * @param $productId
