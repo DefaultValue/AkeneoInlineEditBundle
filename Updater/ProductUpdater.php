@@ -56,14 +56,14 @@ class ProductUpdater
     /**
      * Update product attribute value
      *
-     * @param $id
+     * @param $productId
      * @param $attribute
      * @param $attributeValue
      * @param $dataLocale
      * @param $scopeCode
      * @return bool
      */
-    public function update($id, $attribute, $attributeValue, $dataLocale, $scopeCode)
+    public function update($productId, $attribute, $attributeValue, $dataLocale, $scopeCode)
     {
         $attributeHelper = $this->attributeHelper;
         $localizableAttributes = $attributeHelper->getLocalizableAttributes();
@@ -82,7 +82,7 @@ class ProductUpdater
             ]];
         }
 
-        $product = $this->productRepository->getFullProduct($id);
+        $product = $this->productRepository->getFullProduct($productId);
 
         try {
             $this->productPropertySetter->setData( // set attribute value
