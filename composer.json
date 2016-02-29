@@ -18,7 +18,7 @@
         }
     ],
     "require" : {
-        "php": ">=5.3.2",
+        "php": ">=5.4.4",
         "akeneo/pim-community-dev": ">=1.4.*"
     },
     "autoload" : {
