@@ -30,7 +30,17 @@ function(Backgrid, CellFormatter) {
          * @inheritDoc
          */
         exitEditMode: function () {
-            // @TODO implement method
+            var link = this.model.attributes.apply_attribute_value;
+            var name = this.model.attributes.name;
+            var fullLink = link + '?attrName=name&attrVal=' + name;
+            $.get(fullLink, function (response) {
+                    var messagesHolder = document.getElementsByClassName('flash-messages-holder')[0];
+                    messagesHolder.innerHTML = response.successful ? "<div class='alert alert-success fade in top-messages'>" + response.message + "</div>" : "<div class='alert alert-error fade in top-messages'>" + response.message + "</div>";
+                    setTimeout(function () {
+                        messagesHolder.innerHTML = "";
+                    }, 3000);
+                }
+            );
         }
     });
 });
