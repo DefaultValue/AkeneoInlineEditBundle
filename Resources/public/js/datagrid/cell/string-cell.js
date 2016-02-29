@@ -30,9 +30,20 @@ function(Backgrid, CellFormatter) {
          * @inheritDoc
          */
         exitEditMode: function () {
-            var link = this.model.attributes.apply_attribute_value;
-            var name = this.model.attributes.name;
-            var fullLink = link + '?attrName=name&attrVal=' + name;
+            var previousAttributes = this.model.previousAttributes(),
+                attributes = this.model.attributes;
+            for (var attribute in previousAttributes) {     // define changed attribute
+                if (!previousAttributes.hasOwnProperty(attribute)) {
+                    continue;
+                }
+                if (previousAttributes[attribute] != attributes[attribute]) {
+                    var attrName = attribute;
+                    break;
+                }
+            }
+            var link = this.model.attributes.apply_attribute_value,
+                attrValue = this.model.attributes[attrName],
+                fullLink = link + '?attrName=' + attrName + '&attrVal=' + attrValue;
             $.get(fullLink, function (response) {
                     var messagesHolder = document.getElementsByClassName('flash-messages-holder')[0];
                     messagesHolder.innerHTML = response.successful ? "<div class='alert alert-success fade in top-messages'>" + response.message + "</div>" : "<div class='alert alert-error fade in top-messages'>" + response.message + "</div>";
