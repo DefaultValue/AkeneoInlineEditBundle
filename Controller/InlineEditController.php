@@ -27,14 +27,15 @@ class InlineEditController
      *
      * @param Request $request
      * @param $productId
-     * @param $attributeCode
      * @param $dataLocale
      * @param $scopeCode
-     * @param $attributeValue
      * @return JsonResponse
      */
-    public function updateAttributeValue(Request $request, $productId, $attributeCode, $dataLocale, $scopeCode, $attributeValue)
+    public function updateAttributeValue(Request $request, $productId, $dataLocale, $scopeCode)
     {
+        $attributeCode = $request->query->get('attrName');
+        $attributeValue = $request->query->get('attrVal');
+
         $updated = $this->productUpdater->update($productId, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 
         $message = $updated ? sprintf('Product "%s" %s', $attributeCode, 'attribute value successfully changed') : sprintf('Product "%s" %s', $attributeCode, 'attribute value wasn\'t changed');
