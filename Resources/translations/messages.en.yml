@@ -1,0 +1,3 @@
+default_value:
+    acl:
+        inline_edit_update_value: Grid inline edit update

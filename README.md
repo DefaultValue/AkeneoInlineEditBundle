@@ -4,7 +4,7 @@ AkeneoInlineEditBundle
 
 
 
-Add to datagrid configuration following options:
+Add to datagrid `properties` configuration following options:
 
 ```yml
 update_attribute_value:
