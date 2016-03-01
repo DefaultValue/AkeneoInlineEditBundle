@@ -31,19 +31,29 @@ function(Backgrid, CellFormatter) {
          */
         exitEditMode: function () {
             var previousAttributes = this.model.previousAttributes(),
-                attributes = this.model.attributes;
+                attributes = this.model.attributes,
+                attrName = null;
+
             for (var attribute in previousAttributes) {     // define changed attribute
                 if (!previousAttributes.hasOwnProperty(attribute)) {
                     continue;
                 }
+
                 if (previousAttributes[attribute] != attributes[attribute]) {
-                    var attrName = attribute;
+                    attrName = attribute;
                     break;
                 }
             }
+
+            if (attrName === null) { // prevent sending update request if nothing changed
+                this.defaultExitEditMode();
+                return;
+            }
+
             var link = this.model.attributes.apply_attribute_value,
                 attrValue = this.model.attributes[attrName],
                 fullLink = link + '?attrName=' + attrName + '&attrVal=' + attrValue;
+
             $.get(fullLink, function (response) {
                     var messagesHolder = document.getElementsByClassName('flash-messages-holder')[0];
                     messagesHolder.innerHTML = response.successful ? "<div class='alert alert-success fade in top-messages'>" + response.message + "</div>" : "<div class='alert alert-error fade in top-messages'>" + response.message + "</div>";
@@ -53,7 +63,10 @@ function(Backgrid, CellFormatter) {
                 }
             );
 
-            this.$el.removeClass("error"); // default behavior
+            this.defaultExitEditMode();
+        },
+        defaultExitEditMode: function () { // default behavior for exit mode
+            this.$el.removeClass("error");
             this.currentEditor.remove();
             this.stopListening(this.currentEditor);
             delete this.currentEditor;
