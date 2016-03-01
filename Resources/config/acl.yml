@@ -1,0 +1,5 @@
+default_value_inline_edit_update_value:
+    type: action
+    label: default_value.acl.inline_edit_update_value
+    group_name: pim_enrich.acl_group.product
+
