@@ -33,7 +33,7 @@ class InlineEditController
      * @param $attributeValue
      * @return JsonResponse
      */
-    public function applyAttributeValueAction(Request $request, $productId, $attributeCode, $dataLocale, $scopeCode, $attributeValue)
+    public function updateAttributeValue(Request $request, $productId, $attributeCode, $dataLocale, $scopeCode, $attributeValue)
     {
         $updated = $this->productUpdater->update($productId, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 

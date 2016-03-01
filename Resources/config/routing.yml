@@ -1,6 +1,6 @@
-pim_enrich_product_edit_attribute:
-    path: /{id}/{dataLocale}/{scopeCode}/edit_attribute
-    defaults: { _controller: DefaultValueAkeneoInlineEditBundle:InlineEdit:applyAttributeValue }
+devault_value_inline_edit_update_attribute:
+    path: /{id}/{dataLocale}/{scopeCode}/{attributeCode}/{attributeValue}/edit_attribute
+    defaults: { _controller: DefaultValueAkeneoInlineEditBundle:InlineEdit:updateAttributeValue }
     requirements:
         id: '[0-9a-f]+'
     methods: [GET, POST]

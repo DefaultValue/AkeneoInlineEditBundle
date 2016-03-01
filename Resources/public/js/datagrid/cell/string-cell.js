@@ -44,13 +44,12 @@ function(Backgrid, CellFormatter) {
                     break;
                 }
             }
-
             if (attrName === null) { // prevent sending update request if nothing changed
                 this.defaultExitEditMode();
                 return;
             }
 
-            var link = this.model.attributes.apply_attribute_value,
+            var link = this.model.attributes.update_attribute_value,
                 attrValue = this.model.attributes[attrName],
                 fullLink = link + '?attrName=' + attrName + '&attrVal=' + attrValue;
 
