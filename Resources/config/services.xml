@@ -5,6 +5,7 @@
     <parameters>
         <parameter key="default_value.akeneo_inline_edit.product.attribute_repository.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductAttributesRepository</parameter>
         <parameter key="default_value.akeneo_inline_edit.product.attribute_helper.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductAttributeHelper</parameter>
+        <parameter key="default_value.akeneo_inline_edit.product.product_hydrator.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Product\ProductHydrator</parameter>
         <parameter key="default_value.akeneo_inline_edit.updater.product_updater.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Updater\ProductUpdater</parameter>
         <parameter key="default_value.akeneo_inline_edit.controller.inline_edit_controller.class">DefaultValue\Bundle\AkeneoInlineEditBundle\Controller\InlineEditController</parameter>
     </parameters>
@@ -34,6 +35,9 @@
         <service id="default_value.akeneo_inline_edit.controller.inline_edit_controller" class="%default_value.akeneo_inline_edit.controller.inline_edit_controller.class%">
             <argument type="service" id="default_value.akeneo_inline_edit.updater.product_updater"/>
         </service>
+
+        <!-- ProductHydrator -->
+        <service id="pim_datagrid.datasource.result_record.hydrator.product" class="%default_value.akeneo_inline_edit.product.product_hydrator.class%"/>
 
     </services>
 </container>
