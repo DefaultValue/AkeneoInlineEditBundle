@@ -1,4 +1,4 @@
-devault_value_inline_edit_update_attribute:
+default_value_inline_edit_update_attribute:
     path: /{id}/{dataLocale}/edit_attribute
     defaults: { _controller: DefaultValueAkeneoInlineEditBundle:InlineEdit:updateAttributeValue }
     requirements:
