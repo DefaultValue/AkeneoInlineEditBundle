@@ -33,17 +33,17 @@ class InlineEditController
      * @AclAncestor("default_value_inline_edit_update_value")
      *
      * @param Request $request
-     * @param $productId
+     * @param $id
      * @param $dataLocale
      * @return JsonResponse
      */
-    public function updateAttributeValueAction(Request $request, $productId, $dataLocale)
+    public function updateAttributeValueAction(Request $request, $id, $dataLocale)
     {
         $attributeCode = $request->query->get('attrName');
         $attributeValue = $request->query->get('attrVal');
         $scopeCode = $this->catalogContext->getScopeCode();
 
-        $updated = $this->productUpdater->update($productId, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
+        $updated = $this->productUpdater->update($id, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 
         $message = $updated ? sprintf('Product "%s" %s', $attributeCode, 'attribute value successfully changed') : sprintf('Product "%s" %s', $attributeCode, 'attribute value wasn\'t changed');
         $response = [

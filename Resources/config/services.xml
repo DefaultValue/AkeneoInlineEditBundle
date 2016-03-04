@@ -20,7 +20,6 @@
         <!-- Attribute helper (repository wrapper) -->
         <service id="default_value.akeneo_inline_edit.product.attribute_helper" class="%default_value.akeneo_inline_edit.product.attribute_helper.class%">
             <argument type="service" id="default_value.akeneo_inline_edit.product.attribute_repository"/>
-            <argument type="service" id="doctrine.orm.entity_manager"/>
         </service>
 
         <!-- Product updater -->
@@ -34,6 +33,7 @@
         <!-- Inline edit controller -->
         <service id="default_value.akeneo_inline_edit.controller.inline_edit_controller" class="%default_value.akeneo_inline_edit.controller.inline_edit_controller.class%">
             <argument type="service" id="default_value.akeneo_inline_edit.updater.product_updater"/>
+            <argument type="service" id="pim_catalog.context.catalog"/>
         </service>
 
         <!-- ProductHydrator -->
