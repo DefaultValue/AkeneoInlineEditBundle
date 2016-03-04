@@ -30,12 +30,6 @@
             <argument type="service" id="pim_catalog.saver.product"/>
         </service>
 
-        <!-- Inline edit controller -->
-        <service id="default_value.akeneo_inline_edit.controller.inline_edit_controller" class="%default_value.akeneo_inline_edit.controller.inline_edit_controller.class%">
-            <argument type="service" id="default_value.akeneo_inline_edit.updater.product_updater"/>
-            <argument type="service" id="pim_catalog.context.catalog"/>
-        </service>
-
         <!-- ProductHydrator -->
         <service id="pim_datagrid.datasource.result_record.hydrator.product" class="%default_value.akeneo_inline_edit.product.product_hydrator.class%"/>
 

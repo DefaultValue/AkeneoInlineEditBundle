@@ -2,31 +2,14 @@
 
 namespace  DefaultValue\Bundle\AkeneoInlineEditBundle\Controller;
 
-use DefaultValue\Bundle\AkeneoInlineEditBundle\Updater\ProductUpdater;
-use Pim\Bundle\CatalogBundle\Context\CatalogContext;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
-class InlineEditController
+class InlineEditController extends Controller
 {
-    /**
-     * @var ProductUpdater $productUpdater
-     */
-    private $productUpdater;
-
-    /**
-     * @var CatalogContext $contextConfigurator
-     */
-    private $catalogContext;
-
-    public function __constructor(ProductUpdater $productUpdater, CatalogContext $catalogContext)
-    {
-        $this->productUpdater = $productUpdater;
-        $this->catalogContext = $catalogContext;
-    }
-
     /**
      * Apply attribute value for given locale and scope(channel) after grid inline edit
      *
@@ -41,9 +24,11 @@ class InlineEditController
     {
         $attributeCode = $request->query->get('attrName');
         $attributeValue = $request->query->get('attrVal');
-        $scopeCode = $this->catalogContext->getScopeCode();
+        $catalogContext = $this->get('pim_catalog.context.catalog');
+        $productUpdater = $this->get('default_value.akeneo_inline_edit.updater.product_updater');
+        $scopeCode = $catalogContext->getScopeCode();
 
-        $updated = $this->productUpdater->update($id, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
+        $updated = $productUpdater->update($id, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 
         $message = $updated ? sprintf('Product "%s" %s', $attributeCode, 'attribute value successfully changed') : sprintf('Product "%s" %s', $attributeCode, 'attribute value wasn\'t changed');
         $response = [
