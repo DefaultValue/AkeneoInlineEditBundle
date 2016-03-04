@@ -41,7 +41,7 @@ Add to `app/config/routing.yml` following routing configuration:
 ```yml
 default_value_akeneo_inline_edit:
     resource: "@DefaultValueAkeneoInlineEditBundle/Resources/config/routing.yml"
-```yml
+```
 
 
 
