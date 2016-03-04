@@ -49,7 +49,9 @@ function(Backgrid, CellFormatter) {
                 return;
             }
 
-            var link = this.model.attributes.update_attribute_value,
+            console.log(this.model.attributes);
+
+            var link = this.model.attributes.apply_attribute_value,
                 attrValue = this.model.attributes[attrName],
                 fullLink = link + '?attrName=' + attrName + '&attrVal=' + attrValue;
 

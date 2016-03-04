@@ -3,6 +3,7 @@
 namespace  DefaultValue\Bundle\AkeneoInlineEditBundle\Controller;
 
 use DefaultValue\Bundle\AkeneoInlineEditBundle\Updater\ProductUpdater;
+use Pim\Bundle\CatalogBundle\Context\CatalogContext;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -15,9 +16,15 @@ class InlineEditController
      */
     private $productUpdater;
 
-    public function __constructor(ProductUpdater $productUpdater)
+    /**
+     * @var CatalogContext $contextConfigurator
+     */
+    private $catalogContext;
+
+    public function __constructor(ProductUpdater $productUpdater, CatalogContext $catalogContext)
     {
         $this->productUpdater = $productUpdater;
+        $this->catalogContext = $catalogContext;
     }
 
     /**
@@ -28,13 +35,13 @@ class InlineEditController
      * @param Request $request
      * @param $productId
      * @param $dataLocale
-     * @param $scopeCode
      * @return JsonResponse
      */
-    public function updateAttributeValue(Request $request, $productId, $dataLocale, $scopeCode)
+    public function updateAttributeValueAction(Request $request, $productId, $dataLocale)
     {
         $attributeCode = $request->query->get('attrName');
         $attributeValue = $request->query->get('attrVal');
+        $scopeCode = $this->catalogContext->getScopeCode();
 
         $updated = $this->productUpdater->update($productId, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 
