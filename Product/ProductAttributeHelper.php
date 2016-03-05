@@ -3,6 +3,7 @@
 namespace DefaultValue\Bundle\AkeneoInlineEditBundle\Product;
 
 use Pim\Component\Catalog\Repository\AttributeRepositoryInterface;
+use Pim\Bundle\CatalogBundle\Doctrine\ORM\Repository\AttributeRepository;
 use Doctrine\ORM\EntityManager;
 
 /**
@@ -11,23 +12,16 @@ use Doctrine\ORM\EntityManager;
 class ProductAttributeHelper
 {
     /**
-     * @var ProductAttributesRepository
+     * @var AttributeRepository
      */
     private $attributeRepository;
 
     /**
-     * @var EntityManager
+     * @param AttributeRepository $attributeRepository
      */
-    public $em;
-
-    /**
-     * @param AttributeRepositoryInterface $attributeRepository
-     * @param EntityManager $em
-     */
-    public function __construct(AttributeRepositoryInterface $attributeRepository,EntityManager $em)
+    public function __construct(AttributeRepository $attributeRepository)
     {
         $this->attributeRepository = $attributeRepository;
-        $this->em = $em;
     }
 
     /**
