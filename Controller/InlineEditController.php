@@ -23,8 +23,8 @@ class InlineEditController extends Controller
      */
     public function updateAttributeValueAction(Request $request, $id, $dataLocale, $scopeCode)
     {
-        $attributeCode = $request->query->get('attrName');
-        $attributeValue = $request->query->get('attrVal');
+        $attributeCode = $request->request->get('attrName');
+        $attributeValue = $request->request->get('attrVal');
         $productUpdater = $this->get('default_value.akeneo_inline_edit.updater.product_updater');
 
         $updated = $productUpdater->update($id, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
