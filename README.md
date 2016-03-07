@@ -78,10 +78,11 @@ update_attribute_value:
 ```yml
 columns:
     name:
-        label:         Label
-        data_name:     productLabel
-        selector:      product_label
-        editable: true
+        label:         Name
+        type:          product_value_field
+        selector:      product_value_base
+        editable:      true
 ```
 
-###### Note: editable columns should have the same name as attribute code
+###### Note:
+Editable columns should have the same name as attribute code
