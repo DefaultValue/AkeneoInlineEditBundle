@@ -21,6 +21,10 @@
         "php": ">=5.4.4",
         "akeneo/pim-community-dev": "1.4.x-dev@dev"
     },
+    "require-dev": {
+        "doctrine/migrations": "1.0.0-alpha3@alpha",
+        "doctrine/doctrine-migrations-bundle": "1.0.0"
+    },
     "repositories": [
         {
             "type": "vcs",
