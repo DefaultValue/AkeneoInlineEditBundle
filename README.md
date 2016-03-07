@@ -1,7 +1,7 @@
 AkeneoInlineEditBundle
 =============================
 
-This Bundle provides ability to edit product attributes from Product Grid.
+AkeneoInlineEditBundle provides ability to edit product attributes from Products Grid.
 
 
 ## Installation
@@ -19,7 +19,7 @@ Composer will install the bundle to your project's `vendor/default-value` direct
 
 ### Step 2: Enable the bundle
 
-Enable the bundle in the kernel:
+Enable the Bundle in the kernel:
 
 ``` php
 <?php
@@ -91,4 +91,14 @@ columns:
 ### Acl
 
 Update attribute value action has defined AclAncestor `default_value_inline_edit_update_value`.
-So, if there are needs you can configure permissions for accessing this controller Action (more details in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html)) 
+Configure permissions for accessing AkeneoInlineEditBundle controller Action (more details in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html)) 
+
+
+## Limitation
+
+Bundle supports following types of attributes:
+- Number
+- Text Area
+- Text
+- Price (only for USD currency)
+
