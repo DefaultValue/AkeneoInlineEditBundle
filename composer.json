@@ -34,6 +34,5 @@
     ],
     "autoload" : {
         "psr-4" : { "DefaultValue\\Bundle\\AkeneoInlineEditBundle\\" : "" }
-    },
-    "minimum-stability": "stable"
+    }
 }
