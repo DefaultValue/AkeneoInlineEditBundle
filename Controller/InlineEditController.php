@@ -18,15 +18,14 @@ class InlineEditController extends Controller
      * @param Request $request
      * @param $id
      * @param $dataLocale
+     * @param $scopeCode
      * @return JsonResponse
      */
-    public function updateAttributeValueAction(Request $request, $id, $dataLocale)
+    public function updateAttributeValueAction(Request $request, $id, $dataLocale, $scopeCode)
     {
         $attributeCode = $request->query->get('attrName');
         $attributeValue = $request->query->get('attrVal');
-        $catalogContext = $this->get('pim_catalog.context.catalog');
         $productUpdater = $this->get('default_value.akeneo_inline_edit.updater.product_updater');
-        $scopeCode = $catalogContext->getScopeCode();
 
         $updated = $productUpdater->update($id, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 
