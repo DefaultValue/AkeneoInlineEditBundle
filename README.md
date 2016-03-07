@@ -72,3 +72,16 @@ update_attribute_value:
         - dataLocale
         - scopeCode
 ```
+
+3. Set column property `editable` to true:
+
+```yml
+columns:
+    name:
+        label:         Label
+        data_name:     productLabel
+        selector:      product_label
+        editable: true
+```
+
+###### Note: editable columns should have the same name as attribute code
