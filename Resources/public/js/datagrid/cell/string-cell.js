@@ -50,17 +50,17 @@ function(Backgrid, CellFormatter) {
             }
             
             var link = this.model.attributes.update_attribute_value,
-                attrValue = this.model.attributes[attrName],
-                fullLink = link + '?attrName=' + attrName + '&attrVal=' + attrValue;
+                attrValue = this.model.attributes[attrName];
 
-            $.get(fullLink, function (response) {
-                    var messagesHolder = document.getElementsByClassName('flash-messages-holder')[0];
-                    messagesHolder.innerHTML = response.successful ? "<div class='alert alert-success fade in top-messages'>" + response.message + "</div>" : "<div class='alert alert-error fade in top-messages'>" + response.message + "</div>";
-                    setTimeout(function () {
-                        messagesHolder.innerHTML = "";
-                    }, 3000);
-                }
-            );
+            var postCallback = function (response) {
+                var messagesHolder = document.getElementsByClassName('flash-messages-holder')[0];
+                messagesHolder.innerHTML = response.successful ? "<div class='alert alert-success fade in top-messages'>" + response.message + "</div>" : "<div class='alert alert-error fade in top-messages'>" + response.message + "</div>";
+                setTimeout(function () {
+                    messagesHolder.innerHTML = "";
+                }, 3000);
+            };
+
+            $.post(link, {'attrName': attrName, 'attrVal': attrValue}, postCallback, 'json');
 
             this.defaultExitEditMode();
         },
