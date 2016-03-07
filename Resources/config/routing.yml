@@ -1,6 +1,6 @@
 default_value_inline_edit_update_attribute:
-    path: /{id}/{dataLocale}/edit_attribute
+    path: /{id}/{dataLocale}/{scopeCode}/edit_attribute
     defaults: { _controller: DefaultValueAkeneoInlineEditBundle:InlineEdit:updateAttributeValue }
     requirements:
         id: '[0-9a-f]+'
-    methods: [GET, POST]
+    methods: [POST]
