@@ -21,7 +21,15 @@
         "php": ">=5.4.4",
         "akeneo/pim-community-dev": "1.4.x-dev@dev"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/akeneo/pim-community-dev.git",
+            "branch": "master"
+        }
+    ],
     "autoload" : {
         "psr-4" : { "DefaultValue\\Bundle\\AkeneoInlineEditBundle\\" : "" }
-    }
+    },
+    "minimum-stability": "stable"
 }
