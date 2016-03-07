@@ -35,6 +35,11 @@ class ProductUpdater
     private $productSaver;
 
     /**
+     * @var
+     */
+    private $updateInfo;
+
+    /**
      * @param ProductAttributeHelper  $attributeHelper
      * @param ProductRepository       $productRepository
      * @param PropertySetterInterface $productPropertySetter
@@ -96,10 +101,30 @@ class ProductUpdater
             );
 
             $this->productSaver->save($product);
+            $updateInfo = sprintf('Product "%s" %s', $attribute, 'attribute value successfully changed');
+            $this->setUpdateInfo($updateInfo);
         } catch (\Exception $e) {
+            $updateInfo = sprintf('Product "%s" %s. %s', $attribute, 'attribute value wasn\'t changed', $e->getMessage());
+            $this->setUpdateInfo($updateInfo);
             return false;
         }
 
         return true;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUpdateInfo()
+    {
+        return $this->updateInfo;
+    }
+
+    /**
+     * @param mixed $updateInfo
+     */
+    public function setUpdateInfo($updateInfo)
+    {
+        $this->updateInfo = $updateInfo;
     }
 }

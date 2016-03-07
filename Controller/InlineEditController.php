@@ -29,10 +29,9 @@ class InlineEditController extends Controller
 
         $updated = $productUpdater->update($id, $attributeCode, $attributeValue, $dataLocale, $scopeCode);
 
-        $message = $updated ? sprintf('Product "%s" %s', $attributeCode, 'attribute value successfully changed') : sprintf('Product "%s" %s', $attributeCode, 'attribute value wasn\'t changed');
         $response = [
             'successful' => $updated,
-            'message'    => $message
+            'message'    => $productUpdater->getUpdateInfo()
         ];
 
         if ($request->isXmlHttpRequest()) {
