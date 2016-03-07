@@ -47,6 +47,8 @@ default_value_akeneo_inline_edit:
 
 ## Configuration
 
+### Datagrid
+
 Set following properties in `datagrid` configuration:
 
 1. Set `rowAction` to false (to disable default row Action):
@@ -84,5 +86,9 @@ columns:
         editable:      true
 ```
 
-###### Note:
-Editable columns should have the same name as attribute code
+**Note**: Editable columns should have the same name as attribute code
+
+### Acl
+
+Update attribute value action has defined AclAncestor `default_value_inline_edit_update_value`.
+So, if there are needs you can configure permissions for accessing this controller Action (more details in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html)) 
