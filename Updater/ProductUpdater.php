@@ -73,20 +73,13 @@ class ProductUpdater
         $attributeHelper = $this->attributeHelper;
         $localizableAttributes = $attributeHelper->getLocalizableAttributes();
         $scopableAttributes = $attributeHelper->getScopableAttributes();
-        $priceAttributes = $attributeHelper->getPriceAttributes();
 
         $locale = null;
         $scope = null;
         if (in_array($attribute, $localizableAttributes)) $locale = $dataLocale; // check if attribute localizable
-        if (in_array($attribute, $scopableAttributes)) $scope = $scopeCode;; // check if attribute scopable
-        if (in_array($attribute, $priceAttributes)) {
-            $data = str_replace(" $", "", $attributeValue);
-            $attributeValue = [[
-                'data'      => $data,
-                'currency'  => static::DEFAULT_PRODUCT_CURRENCY
-            ]];
-        }
+        if (in_array($attribute, $scopableAttributes)) $scope = $scopeCode; // check if attribute scopable
 
+        $attributeValue = $this->prepareAttributeValue($attribute, $attributeValue);
         $product = $this->productRepository->getFullProduct($productId);
 
         try {
@@ -101,7 +94,7 @@ class ProductUpdater
             );
 
             $this->productSaver->save($product);
-            $updateInfo = sprintf('Product "%s" %s', $attribute, 'attribute value successfully changed');
+            $updateInfo = sprintf('Product "%s" %s', $attribute, 'attribute value is successfully changed');
             $this->setUpdateInfo($updateInfo);
         } catch (\Exception $e) {
             $updateInfo = sprintf('Product "%s" %s. %s', $attribute, 'attribute value wasn\'t changed', $e->getMessage());
@@ -126,5 +119,24 @@ class ProductUpdater
     public function setUpdateInfo($updateInfo)
     {
         $this->updateInfo = $updateInfo;
+    }
+
+    /**
+     * @param $attribute
+     * @param $attributeValue
+     * @return array
+     */
+    protected function prepareAttributeValue($attribute, $attributeValue)
+    {
+        $priceAttributes = $this->attributeHelper->getPriceAttributes();
+        if (in_array($attribute, $priceAttributes)) {
+            $data = str_replace(" $", "", $attributeValue);
+            $attributeValue = [[
+                'data'      => $data,
+                'currency'  => static::DEFAULT_PRODUCT_CURRENCY
+            ]];
+        }
+
+        return $attributeValue;
     }
 }
