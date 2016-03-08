@@ -3,26 +3,17 @@ AkeneoInlineEditBundle
 
 AkeneoInlineEditBundle provides ability to edit product attributes from Products Grid.
 
-
 ## Installation
 
-### Step 1: Download bundle using composer
-
-Add AkeneoInlineEditBundle by running the command:
+### Step 1: Install bundle with composer
 
 ``` bash
 $ php composer.phar require default-value/akeneo-inline-edit-bundle "@dev"
 ```
 
-Composer will install the bundle to your project's `vendor/default-value` directory.
-
-
 ### Step 2: Enable the bundle
 
-Enable the Bundle in the kernel:
-
 ``` php
-<?php
 // app/AppKernel.php
 
 public function registerBundles()
@@ -33,17 +24,12 @@ public function registerBundles()
     );
 }
 ```
-
-### Step 3: Add routing configuration
-
-Add to `app/config/routing.yml` following routing configuration:
+### Step 3: Add bundle routing to `app/config/routing.yml`
 
 ```yml
 default_value_akeneo_inline_edit:
     resource: "@DefaultValueAkeneoInlineEditBundle/Resources/config/routing.yml"
 ```
-
-
 
 ## Configuration
 
@@ -57,8 +43,8 @@ Set following properties in `datagrid` configuration:
 actions:
     edit:
         type:      navigate
-        label:
-        icon:
+        label:     Label
+        icon:      icon-class
         link:      edit_link
         rowAction: false
 ```
@@ -86,12 +72,13 @@ columns:
         editable:      true
 ```
 
-**Note**: Editable columns should have the same name as attribute code
+**Note**: Editable columns should have the same name as attribute code. E.g. product has attribute `name` and no attribute `title` which comes with default grid configuration.
 
 ### Acl
 
-Update attribute value action has defined AclAncestor `default_value_inline_edit_update_value`.
-Configure permissions for accessing AkeneoInlineEditBundle controller Action (more details in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html)) 
+Update attribute value action has defined AclAncestor - `default_value_inline_edit_update_value`.
+So, you able to configure what roles able to edit product on datagrid.
+More details about ACL and permissions configuration you can find in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html).
 
 
 ## Limitation
@@ -101,4 +88,3 @@ Bundle supports following types of attributes:
 - Text Area
 - Text
 - Price (only for USD currency)
-
