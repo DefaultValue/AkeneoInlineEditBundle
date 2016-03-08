@@ -37,7 +37,7 @@ default_value_akeneo_inline_edit:
 
 Set following properties in `datagrid` configuration:
 
-1. Set `rowAction` to false (to disable default row Action):
+1) Set `rowAction` to false (to disable default row Action):
 
 ```yml
 actions:
@@ -49,7 +49,7 @@ actions:
         rowAction: false
 ```
 
-2. Add to `properties` configuration following options:
+2) Add to `properties` configuration following options:
 
 ```yml
 update_attribute_value:
@@ -61,7 +61,7 @@ update_attribute_value:
         - scopeCode
 ```
 
-3. Set column property `editable` to true:
+3) Set column property `editable` to true:
 
 ```yml
 columns:
