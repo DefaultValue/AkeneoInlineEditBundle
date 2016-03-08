@@ -1,3 +1,5 @@
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/DefaultValue/AkeneoInlineEditBundle/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/DefaultValue/AkeneoInlineEditBundle/?branch=develop)
+
 AkeneoInlineEditBundle
 =============================
 
