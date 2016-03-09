@@ -39,6 +39,7 @@
             "branch": "master"
         }
     ],
+    "minimum-stability": "dev",
     "autoload" : {
         "psr-4" : { "DefaultValue\\Bundle\\AkeneoInlineEditBundle\\" : "" }
     }
