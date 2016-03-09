@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Oro\Bundle\SecurityBundle\Annotation\AclAncestor;
 
 class InlineEditController extends Controller
@@ -19,7 +20,7 @@ class InlineEditController extends Controller
      * @param $id
      * @param $dataLocale
      * @param $scopeCode
-     * @return JsonResponse
+     * @return Response
      */
     public function updateAttributeValueAction(Request $request, $id, $dataLocale, $scopeCode)
     {
