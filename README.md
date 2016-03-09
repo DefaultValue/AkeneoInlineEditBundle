@@ -76,10 +76,10 @@ columns:
 
 **Note**: Editable columns should have the same name as attribute code. E.g. product has attribute `name` and no attribute `title` which comes with default grid configuration.
 
-### Acl
+### ACL
 
-Update attribute value action has defined AclAncestor - `default_value_inline_edit_update_value`.
-So, you able to configure what roles able to edit product on datagrid.
+Action for updating attribute value has defined AclAncestor - `default_value_inline_edit_update_value`.
+So, you are able to configure the roles that have permission to edit product from Products Grid.
 More details about ACL and permissions configuration you can find in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html).
 
 
