@@ -18,28 +18,8 @@
         }
     ],
     "require" : {
-        "php": ">=5.4.4",
-        "oro/platform": "0.10.7",
-        "akeneo/pim-community-dev": "1.4.x-dev@dev",
-        "sensio/generator-bundle": "2.3.5"
+        "php": ">=5.4.4"
     },
-    "require-dev": {
-        "doctrine/migrations": "1.0.0-alpha3@alpha",
-        "doctrine/doctrine-migrations-bundle": "1.0.0"
-    },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/akeneo/pim-community-dev.git",
-            "branch": "master"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/akeneo/platform.git",
-            "branch": "master"
-        }
-    ],
-    "minimum-stability": "dev",
     "autoload" : {
         "psr-4" : { "DefaultValue\\Bundle\\AkeneoInlineEditBundle\\" : "" }
     }
