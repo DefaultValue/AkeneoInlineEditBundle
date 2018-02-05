@@ -14,29 +14,19 @@ class ProductUpdater
 {
     const DEFAULT_PRODUCT_CURRENCY = 'USD';
 
-    /**
-     * @var ProductAttributeHelper
-     */
+    /** @var ProductAttributeHelper */
     private $attributeHelper;
 
-    /**
-     * @var ProductRepository
-     */
+    /** @var ProductRepository */
     private $productRepository;
 
-    /**
-     * @var PropertySetterInterface
-     */
+    /** @var PropertySetterInterface */
     private $productPropertySetter;
 
-    /**
-     * @var ProductSaver
-     */
+    /** @var ProductSaver */
     private $productSaver;
 
-    /**
-     * @var
-     */
+    /** @var string */
     private $updateInfo;
 
     /**
@@ -62,31 +52,28 @@ class ProductUpdater
      * Update product attribute value
      *
      * @param $productId
-     * @param $attribute
-     * @param $attributeValue
-     * @param $dataLocale
-     * @param $scopeCode
+     * @param $attrCode
+     * @param $attrValue
+     * @param $attrLocale
+     * @param $attrScope
      * @return bool
      */
-    public function update($productId, $attribute, $attributeValue, $dataLocale, $scopeCode)
+    public function update($productId, $attrCode, $attrValue, $attrLocale, $attrScope)
     {
+        $isSuccess = false;
         $attributeHelper = $this->attributeHelper;
-        $localizableAttributes = $attributeHelper->getLocalizableAttributes();
-        $scopableAttributes = $attributeHelper->getScopableAttributes();
 
-        $locale = null;
-        $scope = null;
-        if (in_array($attribute, $localizableAttributes)) $locale = $dataLocale; // check if attribute localizable
-        if (in_array($attribute, $scopableAttributes)) $scope = $scopeCode; // check if attribute scopable
+        $locale = in_array($attrCode, $attributeHelper->getLocalizableAttributes(), true) ?  $attrLocale : null;
+        $scope  = in_array($attrCode, $attributeHelper->getScopableAttributes(), true) ? $attrScope : null;
 
-        $attributeValue = $this->prepareAttributeValue($attribute, $attributeValue);
-        $product = $this->productRepository->getFullProduct($productId);
+        $attrValue = $this->prepareAttributeValue($attrCode, $attrValue);
+        $product   = $this->productRepository->getFullProduct($productId);
 
         try {
-            $this->productPropertySetter->setData( // set attribute value
+            $this->productPropertySetter->setData(
                 $product,
-                $attribute,
-                $attributeValue,
+                $attrCode,
+                $attrValue,
                 [
                     'locale' => $locale,
                     'scope'  => $scope
@@ -94,15 +81,13 @@ class ProductUpdater
             );
 
             $this->productSaver->save($product);
-            $updateInfo = sprintf('Product "%s" %s', $attribute, 'attribute value is successfully changed');
-            $this->setUpdateInfo($updateInfo);
+            $this->setUpdateInfo("{$product->getIdentifier()} product '{$attrCode}' changed successfully");
+            $isSuccess = true;
         } catch (\Exception $e) {
-            $updateInfo = sprintf('Product "%s" %s. %s', $attribute, 'attribute value wasn\'t changed', $e->getMessage());
-            $this->setUpdateInfo($updateInfo);
-            return false;
+            $this->setUpdateInfo("Something went wrong. {$product->getIdentifier()} product '{$attrCode}' was not changed");
         }
 
-        return true;
+        return $isSuccess;
     }
 
     /**
@@ -129,11 +114,11 @@ class ProductUpdater
     protected function prepareAttributeValue($attribute, $attributeValue)
     {
         $priceAttributes = $this->attributeHelper->getPriceAttributes();
-        if (in_array($attribute, $priceAttributes)) {
-            $data = str_replace(" $", "", $attributeValue);
+        if (in_array($attribute, $priceAttributes, true)) {
+            $data = str_replace(['$', ',', ' '], '', $attributeValue);
             $attributeValue = [[
-                'data'      => $data,
-                'currency'  => static::DEFAULT_PRODUCT_CURRENCY
+                'amount'   => $data,
+                'currency' => static::DEFAULT_PRODUCT_CURRENCY
             ]];
         }
 
