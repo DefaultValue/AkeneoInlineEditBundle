@@ -1,6 +1,6 @@
 /* global define */
-define(['backgrid', 'oro/datagrid/cell-formatter'],
-function(Backgrid, CellFormatter) {
+define(['backgrid', 'oro/datagrid/cell-formatter', 'oro/messenger'],
+function(Backgrid, CellFormatter, messenger) {
     'use strict';
 
     /**
@@ -30,40 +30,30 @@ function(Backgrid, CellFormatter) {
          * @inheritDoc
          */
         exitEditMode: function () {
-            var previousAttributes = this.model.previousAttributes(),
-                attributes = this.model.attributes,
-                attrName = null;
+            var changedAttributes = this.model.changed;
 
-            for (var attribute in previousAttributes) {     // define changed attribute
-                if (!previousAttributes.hasOwnProperty(attribute)) {
+            for (var attrCode in changedAttributes) {
+                if (!changedAttributes.hasOwnProperty(attrCode)) {
                     continue;
                 }
 
-                if (previousAttributes[attribute] != attributes[attribute]) {
-                    attrName = attribute;
-                    break;
+                var link      = this.model.attributes.update_attribute_value,
+                    attrValue = this.model.attributes[attrCode];
+
+                if (!this.model.attributes[attrCode] && !this.model.previousAttributes()[attrCode]) {
+                    continue;
                 }
+
+                var postCallback = function (response) {
+                    var type = response.successful ? 'success' : 'warning';
+                    messenger.notify(type, response.message);
+                };
+
+                $.post(link, {'code': attrCode, 'value': attrValue}, postCallback, 'json');
             }
-            if (attrName === null) { // prevent sending update request if nothing changed
-                this.defaultExitEditMode();
-                return;
-            }
-            
-            var link = this.model.attributes.update_attribute_value,
-                attrValue = this.model.attributes[attrName];
-
-            var postCallback = function (response) {
-                var messagesHolder = document.getElementsByClassName('flash-messages-holder')[0];
-                messagesHolder.innerHTML = response.successful ? "<div class='alert alert-success fade in top-messages'>" + response.message + "</div>" : "<div class='alert alert-error fade in top-messages'>" + response.message + "</div>";
-                setTimeout(function () {
-                    messagesHolder.innerHTML = "";
-                }, 3000);
-            };
-
-            $.post(link, {'attrName': attrName, 'attrVal': attrValue}, postCallback, 'json');
-
             this.defaultExitEditMode();
         },
+
         defaultExitEditMode: function () { // default behavior for exit mode
             this.$el.removeClass("error");
             this.currentEditor.remove();
