@@ -10,7 +10,7 @@ AkeneoInlineEditBundle provides ability to edit product attributes from Products
 ### Step 1: Install bundle with composer
 
 ``` bash
-$ php composer.phar require default-value/akeneo-inline-edit-bundle "@dev"
+php composer.phar require default-value/akeneo-inline-edit-bundle 2.1
 ```
 
 ### Step 2: Enable the bundle
@@ -80,7 +80,7 @@ columns:
 
 Action for updating attribute value has defined AclAncestor - `default_value_inline_edit_update_value`.
 So, you are able to configure the roles that have permission to edit product from Products Grid.
-More details about ACL and permissions configuration you can find in [Akeneo documentation](http://docs.akeneo.com/latest/cookbook/acl/define-acl.html).
+More details about ACL and permissions configuration you can find in [Akeneo documentation](https://docs.akeneo.com/2.1/manipulate_pim_data/define-acl.html#creating-acl-resources).
 
 
 ## Limitation
