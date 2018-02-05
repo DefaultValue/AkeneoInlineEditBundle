@@ -10,7 +10,7 @@ AkeneoInlineEditBundle provides ability to edit product attributes from Products
 ### Step 1: Install bundle with composer
 
 ``` bash
-php composer.phar require default-value/akeneo-inline-edit-bundle 2.1
+php composer.phar require default-value/akeneo-inline-edit-bundle 2.0
 ```
 
 ### Step 2: Enable the bundle
