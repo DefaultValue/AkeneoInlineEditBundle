@@ -26,7 +26,7 @@
         <service id="default_value.akeneo_inline_edit.updater.product_updater" class="%default_value.akeneo_inline_edit.updater.product_updater.class%">
             <argument type="service" id="default_value.akeneo_inline_edit.product.attribute_helper"/>
             <argument type="service" id="pim_catalog.repository.product"/>
-            <argument type="service" id="pim_catalog.updater.product_property_setter"/>
+            <argument type="service" id="pim_catalog.updater.property_setter"/>
             <argument type="service" id="pim_catalog.saver.product"/>
         </service>
 
