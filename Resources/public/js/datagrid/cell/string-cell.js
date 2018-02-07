@@ -1,6 +1,6 @@
 /* global define */
-define(['backgrid', 'oro/datagrid/cell-formatter'],
-function(Backgrid, CellFormatter) {
+define(['jquery', 'backgrid', 'oro/datagrid/cell-formatter'],
+function($, Backgrid, CellFormatter) {
     'use strict';
 
     /**
