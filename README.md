@@ -5,6 +5,9 @@ AkeneoInlineEditBundle
 
 AkeneoInlineEditBundle provides ability to edit product attributes from Products Grid.
 
+![](https://github.com/DefaultValue/AkeneoInlineEditBundle/blob/v1.5/demo.gif)
+
+
 ## Installation
 
 ### Step 1: Install bundle with composer
